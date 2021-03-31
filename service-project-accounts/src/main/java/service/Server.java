@@ -11,7 +11,7 @@ public class Server extends Jooby {
 	public Server() {
 
 		// the port that the service will run on (should be different for each service)
-		port(8081);
+		port(8080);
 
 		// add CORS support so the client can access the operations
 		use("*", new CorsHandler(new Cors().withMethods("*")));
