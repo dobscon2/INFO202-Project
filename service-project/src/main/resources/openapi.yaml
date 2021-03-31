@@ -64,24 +64,64 @@ paths:
                   url: ''
                 example: ''
               example: ''
-              encoding: ''
           description: Customer found
           x-last-modified: 1617174298660
-          headers: {}
-          links: {}
         '404':
-          description: Could not find customer
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
+          description: Could not find customer
           x-last-modified: 1617175368928
-          headers: {}
-          links: {}
       operationId: get all customer sales
       summary: Get all the customer sales
       description: This resource can return all the sales of the customer
     x-last-modified: 1617173839984
+  '/sale/customer/{id}/{saleID}':
+    summary: Get details on a specific sale
+    description: 'Getting the details of a specific sale '
+    delete:
+      tags: []
+    get:
+      tags: []
+      operationId: Get sale data
+      summary: Getting sale data
+      description: Getting the sale data from a specific sale
+      parameters:
+        - name: id
+          in: path
+          description: The customer's unique ID
+          required: false
+          deprecated: false
+          schema:
+            $ref: '#/components/schemas/Customer'
+          x-last-modified: 1617175672041
+        - name: saleID
+          in: path
+          description: The sale ID
+          required: false
+          deprecated: false
+          schema:
+            $ref: '#/components/schemas/Sale'
+          x-last-modified: 1617175711567
+      responses:
+        '200':
+          description: Sale found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+          x-last-modified: 1617175754059
+          headers: {}
+          links: {}
+        '404':
+          description: Sale not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+          x-last-modified: 1617175801787
+    x-last-modified: 1617175561345
 components:
   schemas:
     Customer:
