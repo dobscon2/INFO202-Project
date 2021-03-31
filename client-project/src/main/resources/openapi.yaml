@@ -60,44 +60,61 @@ paths:
     summary: Specific Customer
     description: A resource that can make changes to a specific customer
     put:
-      tags: []
-      operationId: update customer
-      summary: Update customer details
-      description: Update the customer details
-      parameters:
-        - name: id
-          in: path
-          description: The customer's unique ID
-          required: false
-          deprecated: false
-          schema:
-            type: string
-          x-last-modified: 1617178647220
       requestBody:
         description: Updated customer information
-        required: false
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Customer'
+        required: false
+      tags: []
+      parameters:
+        - deprecated: false
+          name: id
+          description: The customer's unique ID
+          schema:
+            type: string
+          in: path
+          required: false
+          x-last-modified: 1617178647220
       responses:
         '204':
-          description: Update successful
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
+          description: Update successful
           x-last-modified: 1617178720829
-          headers: {}
-          links: {}
         '404':
           description: Customer not found
           x-last-modified: 1617178760289
         '409':
           description: Can't update customer ID
           x-last-modified: 1617178801114
+      operationId: update customer
+      summary: Update customer details
+      description: Update the customer details
     delete:
       tags: []
+      operationId: delete customer
+      summary: Delete a customer
+      description: Delete a customer account
+      responses:
+        '200':
+          description: Found customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          x-last-modified: 1617178970717
+          headers: {}
+          links: {}
+        '204':
+          description: Deleted customer
+          x-last-modified: 1617178994680
+        '404':
+          description: Can't find customer
+          x-last-modified: 1617179028608
     x-last-modified: 1617177890822
 components:
   schemas:
