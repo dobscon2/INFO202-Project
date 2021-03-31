@@ -70,8 +70,8 @@ private Customer customer3;
 		assertThat(createResponse.code(), is(201));
 		Response<Customer> getResponse = customerAPI.customerIdGet(customer3.getId()).execute();
 		Customer returnedCustomer = getResponse.body();
-		assertThat(returnedCustomer, samePropertyValuesAs(customer3, "uri"));
-		assertThat(returnedCustomer, hasProperty("uri", equalTo("http://localhost:8080/api/customer/uo531")));
+		assertThat(returnedCustomer, samePropertyValuesAs(customer3, "username"));
+		assertThat(returnedCustomer, hasProperty("username", equalTo("zucc")));
 		createResponse = customerAPI.createCustomer(customer3).execute();
 		assertThat(createResponse.code(), is(422));
 	}
