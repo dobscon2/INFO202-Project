@@ -58,7 +58,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Customer'
+                  $ref: '#/components/schemas/Sale'
                 description: ''
                 example: ''
                 externalDocs:
