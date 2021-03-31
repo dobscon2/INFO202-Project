@@ -96,6 +96,15 @@ paths:
       description: Update the customer details
     delete:
       tags: []
+      parameters:
+        - deprecated: false
+          name: id
+          description: The customer's unique ID
+          schema:
+            type: string
+          in: path
+          required: false
+          x-last-modified: 1617179362357
       responses:
         '200':
           content:
@@ -113,15 +122,6 @@ paths:
       operationId: delete customer
       summary: Delete a customer
       description: Delete a customer account
-      parameters:
-        - name: id
-          in: path
-          description: The customer's unique ID
-          required: false
-          deprecated: false
-          schema:
-            type: string
-          x-last-modified: 1617179362357
     x-last-modified: 1617177890822
 components:
   schemas:
@@ -152,3 +152,6 @@ tags:
     externalDocs: {}
     x-last-modified: 1617177923100
 security: []
+externalDocs:
+  description: Document location
+  url: 'http://localhost:8081/swagger'
