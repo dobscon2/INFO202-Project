@@ -9,7 +9,7 @@ import org.jooby.json.Gzon;
 public class Server extends Jooby {
 
 	public Server() {
-
+		
 		// the port that the service will run on (should be different for each service)
 		port(8080);
 
