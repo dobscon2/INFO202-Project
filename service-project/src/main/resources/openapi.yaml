@@ -8,19 +8,71 @@ info:
 servers:
   - url: 'http://localhost:8080/api'
 paths:
-  /customer/sale:
-    summary: Sale Resources
-    description: This resource manages sale transactions
-    get:
-      tags: []
-      operationId: get all customer sales
-    x-last-modified: 1617169364765
   /sale:
     summary: Sale Resource
     description: Sale
     post:
+      requestBody:
+        description: Send a new sale through as a JSON payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sale'
+        required: false
       tags: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+          description: Sale created successfully
+          x-last-modified: 1617173509070
+        '422':
+          description: 'Sale not created, sale ID already exists'
+          x-last-modified: 1617173605139
+      operationId: create new sale
+      summary: Creating a new sale
+      description: This resource is able to create a new sale
     x-last-modified: 1617170575051
+  '/sale/customer/{id}':
+    summary: Customer sales
+    description: Get sale details on a particular customer
+    get:
+      tags:
+        - sale
+      parameters:
+        - deprecated: false
+          name: id
+          description: The customer's unique ID code
+          schema:
+            type: string
+          in: path
+          required: false
+          x-last-modified: 1617174094007
+      responses:
+        '200':
+          description: Customer found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+                description: ''
+                example: ''
+                externalDocs:
+                  url: ''
+                  description: ''
+              encoding: ''
+              example: ''
+          x-last-modified: 1617174298660
+          headers: {}
+          links: {}
+      operationId: get all customer sales
+      summary: Get all the customer sales
+      description: This resource can return all the sales of the customer
+    x-last-modified: 1617173839984
 components:
   schemas:
     Customer:
@@ -83,5 +135,9 @@ components:
   headers: {}
   responses: {}
   parameters: {}
-tags: []
+tags:
+  - name: sale
+    description: sale
+    externalDocs: {}
+    x-last-modified: 1617173344179
 security: []
