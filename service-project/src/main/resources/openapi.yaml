@@ -82,19 +82,19 @@ paths:
         - deprecated: false
           name: id
           description: The customer's unique ID
-          schema:
-            $ref: '#/components/schemas/Customer'
           in: path
           required: false
-          x-last-modified: 1617175672041
+          x-last-modified: 1617176853521
+          schema:
+            type: string
         - deprecated: false
           name: saleID
           description: The sale ID
-          schema:
-            $ref: '#/components/schemas/Sale'
           in: path
           required: false
-          x-last-modified: 1617175711567
+          x-last-modified: 1617176906738
+          schema:
+            type: string
       responses:
         '200':
           content:
@@ -119,19 +119,19 @@ paths:
         - deprecated: false
           name: id
           description: The customer's unique ID
-          schema:
-            $ref: '#/components/schemas/Customer'
           in: path
           required: false
-          x-last-modified: 1617175983778
+          x-last-modified: 1617176934883
+          schema:
+            type: string
         - deprecated: false
           name: saleID
           description: The Sale ID
-          schema:
-            $ref: '#/components/schemas/Sale'
           in: path
           required: false
-          x-last-modified: 1617176017637
+          x-last-modified: 1617176951041
+          schema:
+            type: string
       responses:
         '200':
           content:
