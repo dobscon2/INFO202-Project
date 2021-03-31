@@ -13,30 +13,50 @@ paths:
     description: A customer resource
     get:
       tags: []
-      operationId: get all customers
-      summary: Get a list of all customer
-      description: Getting a list of all customers
       responses:
         '200':
-          description: Get all products successful
           content:
             application/json:
               schema:
+                description: Get all customers
                 type: array
-                description: 'Get all customers'
                 items:
                   $ref: '#/components/schemas/Customer'
-                example: ''
                 externalDocs:
-                  url: ''
                   description: ''
-              encoding: ''
+                  url: ''
+                example: ''
               example: ''
+          description: Get all products successful
           x-last-modified: 1617178023946
-          headers: {}
-          links: {}
+      operationId: get all customers
+      summary: Get a list of all customer
+      description: Getting a list of all customers
     post:
       tags: []
+      operationId: create customer
+      summary: Create a new customer
+      description: Create a new customer account
+      requestBody:
+        description: C
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: Customer created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          x-last-modified: 1617178458054
+          headers: {}
+          links: {}
+        '422':
+          description: Customer already exists
+          x-last-modified: 1617178498150
     x-last-modified: 1617177834079
   '/customer/{id}':
     summary: Specific Customer
