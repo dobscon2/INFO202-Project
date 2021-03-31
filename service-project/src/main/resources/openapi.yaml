@@ -52,21 +52,30 @@ paths:
           x-last-modified: 1617174094007
       responses:
         '200':
-          description: Customer found
           content:
             application/json:
               schema:
+                description: ''
                 type: array
                 items:
-                  $ref: '#/components/schemas/Sale'
-                description: ''
-                example: ''
+                  $ref: '#/components/schemas/Customer'
                 externalDocs:
-                  url: ''
                   description: ''
-              encoding: ''
+                  url: ''
+                example: ''
               example: ''
+              encoding: ''
+          description: Customer found
           x-last-modified: 1617174298660
+          headers: {}
+          links: {}
+        '404':
+          description: Could not find customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          x-last-modified: 1617175368928
           headers: {}
           links: {}
       operationId: get all customer sales
