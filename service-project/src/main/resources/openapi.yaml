@@ -64,17 +64,11 @@ paths:
                   url: ''
                 example: ''
               example: ''
-              encoding: ''
           description: Customer found
           x-last-modified: 1617174298660
-          headers: {}
-          links: {}
         '404':
-          content: {}
           description: Could not find customer
           x-last-modified: 1617175368928
-          headers: {}
-          links: {}
       operationId: get all customer sales
       summary: Get all the customer sales
       description: This resource can return all the sales of the customer
