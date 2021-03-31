@@ -80,13 +80,48 @@ paths:
   '/sale/customer/{id}/{saleID}':
     summary: Get details on a specific sale
     description: 'Getting the details of a specific sale '
-    delete:
-      tags: []
     get:
       tags: []
+      parameters:
+        - deprecated: false
+          name: id
+          description: The customer's unique ID
+          schema:
+            $ref: '#/components/schemas/Customer'
+          in: path
+          required: false
+          x-last-modified: 1617175672041
+        - deprecated: false
+          name: saleID
+          description: The sale ID
+          schema:
+            $ref: '#/components/schemas/Sale'
+          in: path
+          required: false
+          x-last-modified: 1617175711567
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+          description: Sale found
+          x-last-modified: 1617175754059
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+          description: Sale not found
+          x-last-modified: 1617175801787
       operationId: Get sale data
       summary: Getting sale data
       description: Getting the sale data from a specific sale
+    delete:
+      tags: []
+      operationId: Delete Sale
+      summary: Delete the sale
+      description: The delete method would delete a sale
       parameters:
         - name: id
           in: path
@@ -95,15 +130,15 @@ paths:
           deprecated: false
           schema:
             $ref: '#/components/schemas/Customer'
-          x-last-modified: 1617175672041
+          x-last-modified: 1617175983778
         - name: saleID
           in: path
-          description: The sale ID
+          description: The Sale ID
           required: false
           deprecated: false
           schema:
             $ref: '#/components/schemas/Sale'
-          x-last-modified: 1617175711567
+          x-last-modified: 1617176017637
       responses:
         '200':
           description: Sale found
@@ -111,16 +146,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Sale'
-          x-last-modified: 1617175754059
+          x-last-modified: 1617176085906
           headers: {}
           links: {}
+        '204':
+          description: Sale Deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+          x-last-modified: 1617176124306
         '404':
           description: Sale not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Sale'
-          x-last-modified: 1617175801787
+          x-last-modified: 1617176156891
     x-last-modified: 1617175561345
 components:
   schemas:
