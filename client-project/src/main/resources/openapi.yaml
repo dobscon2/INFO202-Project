@@ -7,15 +7,50 @@ info:
     url: ''
 servers:
   - url: 'http://localhost:8081/api'
-tags: []
-security: []
-paths: {}
+paths:
+  /customer:
+    summary: Customer Resource
+    description: A customer resource
+    get:
+      tags: []
+      operationId: get all customers
+      summary: Get a list of all customer
+      description: Getting a list of all customers
+      responses:
+        '200':
+          description: Get all products successful
+          content:
+            application/json:
+              schema:
+                type: array
+                description: 'Get all customers'
+                items:
+                  $ref: '#/components/schemas/Customer'
+                example: ''
+                externalDocs:
+                  url: ''
+                  description: ''
+              encoding: ''
+              example: ''
+          x-last-modified: 1617178023946
+          headers: {}
+          links: {}
+    post:
+      tags: []
+    x-last-modified: 1617177834079
+  '/customer/{id}':
+    summary: Specific Customer
+    description: A resource that can make changes to a specific customer
+    put:
+      tags: []
+    delete:
+      tags: []
+    x-last-modified: 1617177890822
 components:
-  securitySchemes: {}
   schemas:
     Customer:
-      type: object
       description: A customer object
+      type: object
       properties:
         id:
           type: string
@@ -30,6 +65,13 @@ components:
         group:
           type: string
       x-last-modified: 1617177718900
+  securitySchemes: {}
   headers: {}
   responses: {}
   parameters: {}
+tags:
+  - name: customer
+    description: customer
+    externalDocs: {}
+    x-last-modified: 1617177923100
+security: []
