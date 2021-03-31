@@ -1,0 +1,87 @@
+openapi: 3.0.1
+info:
+  title: CRAS API
+  version: '1.0'
+  description: The CRAS API manages customers and sales
+  x-logo:
+    url: ''
+servers:
+  - url: 'http://localhost:8080/api'
+paths:
+  /customer/sale:
+    summary: Sale Resources
+    description: This resource manages sale transactions
+    get:
+      tags: []
+      operationId: get all customer sales
+    x-last-modified: 1617169364765
+  /sale:
+    summary: Sale Resource
+    description: Sale
+    post:
+      tags: []
+    x-last-modified: 1617170575051
+components:
+  schemas:
+    Customer:
+      description: Return a specific Customer object by the customer's ID number
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        group:
+          type: string
+        category:
+          type: string
+      x-last-modified: 1617166913619
+    Totals:
+      description: Gives the total of a sale
+      type: object
+      properties:
+        totalPrice:
+          type: number
+        totalTax:
+          type: number
+        totalPayment:
+          type: number
+      x-last-modified: 1617167886805
+    SaleItem:
+      description: A SaleItem that the customer has purchased
+      type: object
+      properties:
+        productID:
+          type: string
+        quantity:
+          type: number
+        price:
+          type: number
+      x-last-modified: 1617168123010
+    Sale:
+      description: A Sale object
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+        saleDate:
+          type: string
+        customer:
+          $ref: '#/components/schemas/Customer'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SaleItem'
+        totals:
+          $ref: '#/components/schemas/Totals'
+      x-last-modified: 1617170416003
+  securitySchemes: {}
+  headers: {}
+  responses: {}
+  parameters: {}
+tags: []
+security: []
