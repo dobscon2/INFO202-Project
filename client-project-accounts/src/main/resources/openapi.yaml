@@ -123,6 +123,30 @@ paths:
       summary: Delete a customer
       description: Delete a customer account
     x-last-modified: 1617177890822
+    get:
+      description: ''
+      parameters:
+        - name: id
+          in: path
+          description: Get a specific customer based on customer ID
+          required: true
+          deprecated: false
+          schema:
+            type: string
+          x-last-modified: 1617226240377
+      responses:
+        '200':
+          description: Customer Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          x-last-modified: 1617226359097
+          headers: {}
+          links: {}
+        '404':
+          description: Customer not found
+          x-last-modified: 1617226370464
 components:
   schemas:
     Customer:
@@ -150,7 +174,7 @@ tags:
   - name: customer
     description: customer
     externalDocs:
-      url: 'http://localhost:8081/swagger'
       description: Stop asking me for this
+      url: 'http://localhost:8081/swagger'
     x-last-modified: 1617180029075
 security: []

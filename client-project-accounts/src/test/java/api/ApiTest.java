@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -22,6 +23,7 @@ private DefaultApi customerAPI;
 
 private Customer customer1;
 private Customer customer2;
+private Customer customer3;
 
 
 	@BeforeEach
@@ -44,6 +46,14 @@ private Customer customer2;
 		customer2.setLastname("Doe");
 		customer2.setGroup("Customer VIP");
 		
+		customer3 = new Customer();
+		customer3.setId("uo531");
+		customer3.setUsername("zucc");
+		customer3.setEmail("zucc@facebook.com");
+		customer3.setFirstname("Mark");
+		customer3.setLastname("Zuckerberg");
+		customer3.setGroup("Customer VIP");
+		
 		customerAPI.createCustomer(customer1);
 		customerAPI.createCustomer(customer2);
 	}
@@ -55,8 +65,15 @@ private Customer customer2;
 	}
 
 	@Test
-	public void testSomething() throws IOException {
-		fail("Test is not implemented yet.");
+	public void testCreateCustomer() throws IOException {
+		Response<Customer> createResponse = customerAPI.createCustomer(customer3).execute();
+		assertThat(createResponse.code(), is(201));
+		Response<Customer> getResponse = customerAPI.customerIdGet(customer3.getId()).execute();
+		Customer returnedCustomer = getResponse.body();
+		assertThat(returnedCustomer, samePropertyValuesAs(customer3, "uri"));
+		assertThat(returnedCustomer, hasProperty("uri", equalTo("http://localhost:8080/api/customer/uo531")));
+		createResponse = customerAPI.createCustomer(customer3).execute();
+		assertThat(createResponse.code(), is(422));
 	}
 
 	@Test
