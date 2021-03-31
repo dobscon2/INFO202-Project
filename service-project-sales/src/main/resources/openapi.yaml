@@ -1,0 +1,215 @@
+openapi: 3.0.1
+info:
+  title: Sale API
+  version: '1.0'
+  description: Manages Sales
+  x-logo:
+    url: ''
+servers:
+  - url: 'http://localhost:8081/api'
+paths:
+  /sale:
+    summary: Sale Resource
+    description: Sale
+    post:
+      requestBody:
+        description: Send a new sale through as a JSON payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sale'
+        required: false
+      tags: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+          description: Sale created successfully
+          x-last-modified: 1617173509070
+        '422':
+          description: 'Sale not created, sale ID already exists'
+          x-last-modified: 1617173605139
+      operationId: create new sale
+      summary: Creating a new sale
+      description: This resource is able to create a new sale
+    x-last-modified: 1617170575051
+  '/sale/customer/{id}':
+    summary: Customer sales
+    description: Get sale details on a particular customer
+    get:
+      tags:
+        - sale
+      parameters:
+        - deprecated: false
+          name: id
+          description: The customer's unique ID code
+          schema:
+            type: string
+          in: path
+          required: true
+          x-last-modified: 1617174094007
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+                externalDocs:
+                  description: ''
+                  url: ''
+                example: ''
+              example: ''
+          description: Customer found
+          x-last-modified: 1617174298660
+        '404':
+          description: Could not find customer
+          x-last-modified: 1617175368928
+      operationId: get all customer sales
+      summary: Get all the customer sales
+      description: This resource can return all the sales of the customer
+    x-last-modified: 1617173839984
+  '/sale/customer/{id}/{saleID}':
+    summary: Get details on a specific sale
+    description: 'Getting the details of a specific sale '
+    get:
+      tags: []
+      parameters:
+        - deprecated: false
+          name: id
+          description: The customer's unique ID
+          schema:
+            type: string
+          in: path
+          required: true
+          x-last-modified: 1617176853521
+        - deprecated: false
+          name: saleID
+          description: The sale ID
+          schema:
+            type: string
+          in: path
+          required: true
+          x-last-modified: 1617176906738
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+          description: Sale found
+          x-last-modified: 1617175754059
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+          description: Sale not found
+          x-last-modified: 1617175801787
+      operationId: Get sale data
+      summary: Getting sale data
+      description: Getting the sale data from a specific sale
+    delete:
+      tags: []
+      parameters:
+        - deprecated: false
+          name: id
+          description: The customer's unique ID
+          schema:
+            type: string
+          in: path
+          required: true
+          x-last-modified: 1617176934883
+        - deprecated: false
+          name: saleID
+          description: The Sale ID
+          schema:
+            type: string
+          in: path
+          required: true
+          x-last-modified: 1617176951041
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+          description: Sale found
+          x-last-modified: 1617176085906
+        '204':
+          description: Sale Deleted
+          x-last-modified: 1617176124306
+        '404':
+          description: Sale not found
+          x-last-modified: 1617176156891
+      operationId: Delete Sale
+      summary: Delete the sale
+      description: The delete method would delete a sale
+    x-last-modified: 1617175561345
+components:
+  schemas:
+    Customer:
+      description: Return a specific Customer object by the customer's ID number
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        group:
+          type: string
+        category:
+          type: string
+      x-last-modified: 1617166913619
+    Totals:
+      description: Gives the total of a sale
+      type: object
+      properties:
+        totalPrice:
+          type: number
+        totalTax:
+          type: number
+        totalPayment:
+          type: number
+      x-last-modified: 1617167886805
+    SaleItem:
+      description: A SaleItem that the customer has purchased
+      type: object
+      properties:
+        productID:
+          type: string
+        quantity:
+          type: number
+        price:
+          type: number
+      x-last-modified: 1617168123010
+    Sale:
+      description: A Sale object
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+        saleDate:
+          type: string
+        customer:
+          $ref: '#/components/schemas/Customer'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SaleItem'
+        totals:
+          $ref: '#/components/schemas/Totals'
+      x-last-modified: 1617170416003
+  securitySchemes: {}
+  headers: {}
+  responses: {}
+  parameters: {}
+security: []
