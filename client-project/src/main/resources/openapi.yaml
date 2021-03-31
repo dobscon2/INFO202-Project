@@ -1,7 +1,35 @@
 openapi: 3.0.1
 info:
-  title: Your title goes here.
-  description: Replace this file with the YAML for your service.
-  version: "1.0"
+  title: Customer API
+  version: '1.0'
+  description: This API manages the customer accounts
+  x-logo:
+    url: ''
 servers:
-- url: http://localhost:8081/api
+  - url: 'http://localhost:8081/api'
+tags: []
+security: []
+paths: {}
+components:
+  securitySchemes: {}
+  schemas:
+    Customer:
+      type: object
+      description: A customer object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        group:
+          type: string
+      x-last-modified: 1617177718900
+  headers: {}
+  responses: {}
+  parameters: {}
