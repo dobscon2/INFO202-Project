@@ -96,25 +96,32 @@ paths:
       description: Update the customer details
     delete:
       tags: []
-      operationId: delete customer
-      summary: Delete a customer
-      description: Delete a customer account
       responses:
         '200':
-          description: Found customer
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
+          description: Found customer
           x-last-modified: 1617178970717
-          headers: {}
-          links: {}
         '204':
           description: Deleted customer
           x-last-modified: 1617178994680
         '404':
           description: Can't find customer
           x-last-modified: 1617179028608
+      operationId: delete customer
+      summary: Delete a customer
+      description: Delete a customer account
+      parameters:
+        - name: id
+          in: path
+          description: The customer's unique ID
+          required: false
+          deprecated: false
+          schema:
+            type: string
+          x-last-modified: 1617179362357
     x-last-modified: 1617177890822
 components:
   schemas:
