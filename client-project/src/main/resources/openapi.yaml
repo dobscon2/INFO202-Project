@@ -1,157 +1,227 @@
-openapi: 3.0.1
-info:
-  title: Customer API
-  version: '1.0'
-  description: This API manages the customer accounts
-  x-logo:
-    url: ''
-servers:
-  - url: 'http://localhost:8081/api'
-paths:
-  /customer:
-    summary: Customer Resource
-    description: A customer resource
-    get:
-      tags: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                description: Get all customers
-                type: array
-                items:
-                  $ref: '#/components/schemas/Customer'
-                externalDocs:
-                  description: ''
-                  url: ''
-                example: ''
-              example: ''
-          description: Get all products successful
-          x-last-modified: 1617178023946
-      operationId: get all customers
-      summary: Get a list of all customer
-      description: Getting a list of all customers
-    post:
-      requestBody:
-        description: C
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Customer'
-        required: false
-      tags: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Customer'
-          description: Customer created
-          x-last-modified: 1617178458054
-        '422':
-          description: Customer already exists
-          x-last-modified: 1617178498150
-      operationId: create customer
-      summary: Create a new customer
-      description: Create a new customer account
-    x-last-modified: 1617177834079
-  '/customer/{id}':
-    summary: Specific Customer
-    description: A resource that can make changes to a specific customer
-    put:
-      requestBody:
-        description: Updated customer information
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Customer'
-        required: true
-      tags: []
-      parameters:
-        - deprecated: false
-          name: id
-          description: The customer's unique ID
-          schema:
-            type: string
-          in: path
-          required: true
-          x-last-modified: 1617178647220
-      responses:
-        '204':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Customer'
-          description: Update successful
-          x-last-modified: 1617178720829
-        '404':
-          description: Customer not found
-          x-last-modified: 1617178760289
-        '409':
-          description: Can't update customer ID
-          x-last-modified: 1617178801114
-      operationId: update customer
-      summary: Update customer details
-      description: Update the customer details
-    delete:
-      tags: []
-      parameters:
-        - deprecated: false
-          name: id
-          description: The customer's unique ID
-          schema:
-            type: string
-          in: path
-          required: true
-          x-last-modified: 1617179362357
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Customer'
-          description: Found customer
-          x-last-modified: 1617178970717
-        '204':
-          description: Deleted customer
-          x-last-modified: 1617178994680
-        '404':
-          description: Can't find customer
-          x-last-modified: 1617179028608
-      operationId: delete customer
-      summary: Delete a customer
-      description: Delete a customer account
-    x-last-modified: 1617177890822
-components:
-  schemas:
-    Customer:
-      description: A customer object
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-        username:
-          type: string
-        firstname:
-          type: string
-        lastname:
-          type: string
-        group:
-          type: string
-      x-last-modified: 1617177718900
-  securitySchemes: {}
-  headers: {}
-  responses: {}
-  parameters: {}
-tags:
-  - name: customer
-    description: customer
-    externalDocs: {}
-    x-last-modified: 1617177923100
-security: []
-externalDocs:
-  description: Document location
-  url: 'http://localhost:8081/swagger'
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Customer API",
+    "version": "1.0",
+    "description": "This API manages the customer accounts",
+    "x-logo": {
+      "url": ""
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081/api"
+    }
+  ],
+  "paths": {
+    "/customer": {
+      "summary": "Customer Resource",
+      "description": "A customer resource",
+      "get": {
+        "tags": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Get all customers",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Customer"
+                  },
+                  "externalDocs": {
+                    "description": "",
+                    "url": ""
+                  },
+                  "example": ""
+                },
+                "example": ""
+              }
+            },
+            "description": "Get all products successful",
+            "x-last-modified": 1617178023946
+          }
+        },
+        "operationId": "get all customers",
+        "summary": "Get a list of all customer",
+        "description": "Getting a list of all customers"
+      },
+      "post": {
+        "requestBody": {
+          "description": "C",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          },
+          "required": false
+        },
+        "tags": [],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            },
+            "description": "Customer created",
+            "x-last-modified": 1617178458054
+          },
+          "422": {
+            "description": "Customer already exists",
+            "x-last-modified": 1617178498150
+          }
+        },
+        "operationId": "create customer",
+        "summary": "Create a new customer",
+        "description": "Create a new customer account"
+      },
+      "x-last-modified": 1617177834079
+    },
+    "/customer/{id}": {
+      "summary": "Specific Customer",
+      "description": "A resource that can make changes to a specific customer",
+      "put": {
+        "requestBody": {
+          "description": "Updated customer information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          },
+          "required": true
+        },
+        "tags": [],
+        "parameters": [
+          {
+            "deprecated": false,
+            "name": "id",
+            "description": "The customer's unique ID",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "required": true,
+            "x-last-modified": 1617178647220
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            },
+            "description": "Update successful",
+            "x-last-modified": 1617178720829
+          },
+          "404": {
+            "description": "Customer not found",
+            "x-last-modified": 1617178760289
+          },
+          "409": {
+            "description": "Can't update customer ID",
+            "x-last-modified": 1617178801114
+          }
+        },
+        "operationId": "update customer",
+        "summary": "Update customer details",
+        "description": "Update the customer details"
+      },
+      "delete": {
+        "tags": [],
+        "parameters": [
+          {
+            "deprecated": false,
+            "name": "id",
+            "description": "The customer's unique ID",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "required": true,
+            "x-last-modified": 1617179362357
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            },
+            "description": "Found customer",
+            "x-last-modified": 1617178970717
+          },
+          "204": {
+            "description": "Deleted customer",
+            "x-last-modified": 1617178994680
+          },
+          "404": {
+            "description": "Can't find customer",
+            "x-last-modified": 1617179028608
+          }
+        },
+        "operationId": "delete customer",
+        "summary": "Delete a customer",
+        "description": "Delete a customer account"
+      },
+      "x-last-modified": 1617177890822
+    }
+  },
+  "components": {
+    "schemas": {
+      "Customer": {
+        "description": "A customer object",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          }
+        },
+        "x-last-modified": 1617177718900
+      }
+    },
+    "securitySchemes": {},
+    "headers": {},
+    "responses": {},
+    "parameters": {}
+  },
+  "tags": [
+    {
+      "name": "customer",
+      "description": "customer",
+      "externalDocs": {
+        "url": "http://localhost:8081/swagger",
+        "description": "Stop asking me for this"
+      },
+      "x-last-modified": 1617180029075
+    }
+  ],
+  "security": []
+}
