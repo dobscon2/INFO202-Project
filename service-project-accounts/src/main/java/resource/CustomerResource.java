@@ -29,9 +29,6 @@ public class CustomerResource extends Jooby {
 			post((req, rsp) -> {
 				Customer customer = req.body(Customer.class);
 
-				// construct the URI for this customer
-				String uri = "http://" + req.hostname() + ":" + req.port() + "" + req.path() + "/product/" + customer.getId();
-
 				if (!dao.exists(customer.getId())) {
 					// store the customer
 					dao.createCustomer(customer);
