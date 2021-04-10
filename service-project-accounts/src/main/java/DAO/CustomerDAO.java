@@ -46,6 +46,7 @@ public class CustomerDAO {
     }
     
     public boolean exists(String id) {
+        System.out.println(customers.containsKey(id));
         return customers.containsKey(id);
     }
 }

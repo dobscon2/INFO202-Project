@@ -20,6 +20,8 @@ public class Customer {
         this.lastName = lastName;
         this.group = group;
     }
+    
+    public Customer() {}
 
     public String getEmail() {
         return email;
