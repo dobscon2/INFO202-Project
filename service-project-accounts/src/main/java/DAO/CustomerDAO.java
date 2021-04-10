@@ -18,12 +18,6 @@ import java.util.TreeMap;
 public class CustomerDAO {
 
     private static final Map<String, Customer> customers = new TreeMap<String, Customer>();
-
-    static {
-        if (customers.isEmpty()) {
-            customers.put("CUSTOMER1", new Customer("CUSTOMER1", "testy@tester.com", "testy", "Testy", "Tester", "Test Group"));
-        }
-    }
     
     public List<Customer> getCustomers() {
         return new ArrayList<Customer>(customers.values());
