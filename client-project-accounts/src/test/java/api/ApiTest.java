@@ -2,11 +2,12 @@ package api;
 
 import domain.Customer;
 import java.io.IOException;
+import java.util.List;
+import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -53,8 +54,8 @@ public class ApiTest {
         customer3.setLastname("Zuckerberg");
         customer3.setGroup("Customer VIP");
 
-        customerAPI.createCustomer(customer1);
-        customerAPI.createCustomer(customer2);
+        customerAPI.createCustomer(customer1).execute();
+        customerAPI.createCustomer(customer2).execute();
     }
 
     @AfterEach
@@ -78,12 +79,18 @@ public class ApiTest {
     public void testDeleteCustomer() throws IOException {
         Response<Customer> getCustomerResponse = customerAPI.customerIdGet(customer3.getId()).execute();
         assertThat(getCustomerResponse.code(), is(200));
-
         Response getCustomerDeleteResponse = customerAPI.deleteCustomer(customer3.getId()).execute();
         assertThat(getCustomerDeleteResponse.code(), is(204));
-
         Response getProductResponse2 = customerAPI.customerIdGet(customer3.getId()).execute();
         assertThat(getProductResponse2.code(), is(404));
+    }
+
+    @Test
+    public void testGetCustomers() throws IOException {
+        Response<List<Customer>> getResponse = customerAPI.getAllCustomers().execute();
+        List<Customer> returnedCustomers = getResponse.body();
+        assertThat(getResponse.code(), is(200));
+        assertThat(returnedCustomers, hasItems(customer1, customer2));
     }
 
 }
