@@ -75,8 +75,15 @@ public class ApiTest {
     }
 
     @Test
-    public void testSomethingElse() throws IOException {
-        fail("Test is not implemented yet.");
+    public void testDeleteCustomer() throws IOException {
+        Response<Customer> getCustomerResponse = customerAPI.customerIdGet(customer3.getId()).execute();
+        assertThat(getCustomerResponse.code(), is(200));
+
+        Response getCustomerDeleteResponse = customerAPI.deleteCustomer(customer3.getId()).execute();
+        assertThat(getCustomerDeleteResponse.code(), is(204));
+
+        Response getProductResponse2 = customerAPI.customerIdGet(customer3.getId()).execute();
+        assertThat(getProductResponse2.code(), is(404));
     }
 
 }
