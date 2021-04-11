@@ -30,7 +30,7 @@ paths:
           description: Sale created successfully
           x-last-modified: 1617173509070
         '422':
-          description: 'Sale not created, sale ID already exists'
+          description: 'Sale ID already exists'
           x-last-modified: 1617173605139
       operationId: create new sale
       summary: Creating a new sale
@@ -59,7 +59,7 @@ paths:
                 description: ''
                 type: array
                 items:
-                  $ref: '#/components/schemas/Customer'
+                  $ref: '#/components/schemas/Sale'
                 externalDocs:
                   description: ''
                   url: ''
