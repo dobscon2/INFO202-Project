@@ -19,7 +19,7 @@ public class CustomerSaleResource extends Jooby {
 
 	public CustomerSaleResource(SaleDAO dao) {
 
-		path("/api/sales/customer", () -> {
+		path("/api/sale/customer", () -> {
 
 			/**
 			 * Get customer sales.
@@ -31,7 +31,7 @@ public class CustomerSaleResource extends Jooby {
 				if (dao.doesCustomerExist(customerId)) {
 					rsp.send(dao.getSales(customerId));
 				} else {
-					rsp.status(Status.NOT_FOUND).send(new ErrorMessage("That customer does not exists"));
+					rsp.status(Status.NOT_FOUND).send(new ErrorMessage("Customer ID not found"));
 				}
 
 			});
@@ -45,7 +45,7 @@ public class CustomerSaleResource extends Jooby {
 				if (dao.doesCustomerExist(customerId)) {
 					rsp.send(dao.getSummary(customerId));
 				} else {
-					rsp.status(Status.NOT_FOUND).send(new ErrorMessage("That customer does not exists"));
+					rsp.status(Status.NOT_FOUND).send(new ErrorMessage("Customer not found"));
 				}
 
 			});

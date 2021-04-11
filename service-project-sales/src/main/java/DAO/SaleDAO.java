@@ -23,40 +23,40 @@ import java.util.TreeMap;
  */
 public class SaleDAO {
 
-    private static final Multimap<String, Sale> salesByCustomer = ArrayListMultimap.create();
-    private static final Map<String, Sale> salesBySaleId = new HashMap<>();
+    private static final Multimap<String, Sale> customerSale = ArrayListMultimap.create();
+    private static final Map<String, Sale> sales = new HashMap<>();
 
     private static final Double THRESHHOLD = 500.0;
 
     public void saveSale(Sale sale) {
-        salesByCustomer.put(sale.getCustomer().getId(), sale);
-        salesBySaleId.put(sale.getId(), sale);
+        customerSale.put(sale.getCustomer().getId(), sale);
+        sales.put(sale.getId(), sale);
     }
 
     public void deleteSale(String saleId) {
-        Sale sale = salesBySaleId.get(saleId);
-        salesByCustomer.remove(sale.getCustomer().getId(), sale);
-        salesBySaleId.remove(sale.getId());
+        Sale sale = sales.get(saleId);
+        customerSale.remove(sale.getCustomer().getId(), sale);
+        sales.remove(sale.getId());
     }
 
     public Collection<Sale> getSales(String customerId) {
-        return salesByCustomer.get(customerId);
+        return customerSale.get(customerId);
     }
 
     public Boolean doesSaleExist(String saleId) {
-        return salesBySaleId.containsKey(saleId);
+        return sales.containsKey(saleId);
     }
 
     public Boolean doesCustomerExist(String customerId) {
-        return salesByCustomer.containsKey(customerId);
+        return customerSale.containsKey(customerId);
     }
 
     public Summary getSummary(String customerId) {
-        Collection<Sale> custSales = getSales(customerId);
+        Collection<Sale> customerSales = getSales(customerId);
 
         Summary summary = new Summary();
-        summary.setNumberOfSales(custSales.size());
-        Double totalPayment = custSales.stream().mapToDouble(sale -> sale.getTotals().getTotalPayment()).sum();
+        summary.setNumberOfSales(customerSales.size());
+        Double totalPayment = customerSales.stream().mapToDouble(sale -> sale.getTotals().getTotalPayment()).sum();
         summary.setTotalPayment(totalPayment);
         summary.setGroup(totalPayment <= THRESHHOLD ? "Regular Customers" : "VIP Customers");
 

@@ -20,7 +20,7 @@ public class SaleResource extends Jooby {
 
     public SaleResource(SaleDAO dao) {
 
-        path("/api/sales", () -> {
+        path("/api/sale", () -> {
 
             post((req, rsp) -> {
 
@@ -32,7 +32,7 @@ public class SaleResource extends Jooby {
                     dao.saveSale(sale);
                     rsp.status(Status.CREATED).send(sale);
                 } else {
-                    rsp.status(Status.UNPROCESSABLE_ENTITY).send(new ErrorMessage("That sale already exists"));
+                    rsp.status(Status.UNPROCESSABLE_ENTITY).send(new ErrorMessage("Sale Exists"));
                 }
 
             });
@@ -44,7 +44,7 @@ public class SaleResource extends Jooby {
                     rsp.status(Status.NO_CONTENT);
                 } else {
                     System.out.println("********* IN ERROR");
-                    rsp.status(Status.NOT_FOUND).send(new ErrorMessage("No sale matching that ID was found."));
+                    rsp.status(Status.NOT_FOUND).send(new ErrorMessage("Sale ID not found."));
                 }
             });
 
