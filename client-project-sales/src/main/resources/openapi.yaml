@@ -19,7 +19,8 @@ paths:
             schema:
               $ref: '#/components/schemas/Sale'
         required: false
-      tags: []
+      tags:
+        - sale
       responses:
         '201':
           content:
@@ -40,7 +41,7 @@ paths:
     description: Get sale details on a particular customer
     get:
       tags:
-        - sale
+        - customer sale
       parameters:
         - deprecated: false
           name: id
@@ -84,7 +85,7 @@ paths:
   '/sale/customer/{id}/summary':
     get:
       tags:
-        - sale
+        - customer sale
       parameters:
         - deprecated: false
           name: id
@@ -232,4 +233,7 @@ tags:
       description: Nothing is here
       url: 'http://localhost:8081/swagger'
     x-last-modified: 1617223063459
+  - name: customer sale
+    x-last-modified: 1618132478581
+    description: customer sale
 security: []
