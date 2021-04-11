@@ -5,8 +5,14 @@
  */
 package DAO;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+import com.google.gson.Gson;
 import domain.Sale;
+import domain.Summary;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -17,30 +23,44 @@ import java.util.TreeMap;
  */
 public class SaleDAO {
 
-    private static final Map<String, Sale> sales = new TreeMap<String, Sale>();
-    
-    public List<Sale> getSales() {
-        return new ArrayList<Sale>(sales.values());
+    private static final Multimap<String, Sale> salesByCustomer = ArrayListMultimap.create();
+    private static final Map<String, Sale> salesBySaleId = new HashMap<>();
+
+    private static final Double THRESHHOLD = 500.0;
+
+    public void saveSale(Sale sale) {
+        salesByCustomer.put(sale.getCustomer().getId(), sale);
+        salesBySaleId.put(sale.getId(), sale);
     }
-    
-    public void createSale(Sale sale) {
-        sales.put(sale.getId(), sale);
+
+    public void deleteSale(String saleId) {
+        Sale sale = salesBySaleId.get(saleId);
+        salesByCustomer.remove(sale.getCustomer().getId(), sale);
+        salesBySaleId.remove(sale.getId());
     }
-    
-    public Sale getSaleById(String id) {
-        return sales.get(id);
+
+    public Collection<Sale> getSales(String customerId) {
+        return salesByCustomer.get(customerId);
     }
-    
-    public void deleteSale(String id) {
-        sales.remove(id);
+
+    public Boolean doesSaleExist(String saleId) {
+        return salesBySaleId.containsKey(saleId);
     }
-    
-    public void updateSale(String id, Sale updatedSale) {
-        sales.put(id, updatedSale);
+
+    public Boolean doesCustomerExist(String customerId) {
+        return salesByCustomer.containsKey(customerId);
     }
-    
-    public boolean exists(String id) {
-        System.out.println(sales.containsKey(id));
-        return sales.containsKey(id);
+
+    public Summary getSummary(String customerId) {
+        Collection<Sale> custSales = getSales(customerId);
+
+        Summary summary = new Summary();
+        summary.setNumberOfSales(custSales.size());
+        Double totalPayment = custSales.stream().mapToDouble(sale -> sale.getTotals().getTotalPayment()).sum();
+        summary.setTotalPayment(totalPayment);
+        summary.setGroup(totalPayment <= THRESHHOLD ? "Regular Customers" : "VIP Customers");
+
+        return summary;
     }
+
 }
