@@ -72,125 +72,79 @@ paths:
       operationId: get all customer sales
       summary: Get all the customer sales
       description: This resource can return all the sales of the customer
+    parameters:
+      - deprecated: false
+        name: id
+        schema:
+          type: string
+        in: path
+        required: true
+        x-last-modified: 1618128442550
     x-last-modified: 1617173839984
-  '/sale/customer/{id}/{saleID}':
-    summary: Get details on a specific sale
-    description: 'Getting the details of a specific sale '
+  '/sale/customer/{id}/summary':
     get:
-      tags: []
+      tags:
+        - sale
       parameters:
         - deprecated: false
           name: id
-          description: The customer's unique ID
+          description: Sale ID
           schema:
             type: string
           in: path
           required: true
-          x-last-modified: 1617223376382
-        - deprecated: false
-          name: saleID
-          description: The sale ID
-          schema:
-            type: string
-          in: path
-          required: true
-          x-last-modified: 1617223380535
+          x-last-modified: 1618129471696
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sale'
-          description: Sale found
-          x-last-modified: 1617175754059
+                $ref: '#/components/schemas/Summary'
+          description: Sale Found
+          x-last-modified: 1618128995554
         '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Sale'
-          description: Sale not found
-          x-last-modified: 1617175801787
-      operationId: Get sale data
-      summary: Getting sale data
-      description: Getting the sale data from a specific sale
+          description: Sale Not Found
+          x-last-modified: 1618129014165
+    parameters:
+      - deprecated: false
+        name: id
+        schema:
+          type: string
+        in: path
+        required: true
+        x-last-modified: 1618128558840
+    x-last-modified: 1618128513828
+  '/sale/{id}':
     delete:
-      tags: []
+      tags:
+        - sale
       parameters:
         - deprecated: false
           name: id
-          description: The customer's unique ID
-          schema:
-            type: string
-          in: path
-          required: true
-          x-last-modified: 1617223391337
-        - deprecated: false
-          name: saleID
           description: The Sale ID
           schema:
             type: string
           in: path
           required: true
-          x-last-modified: 1617223394623
+          x-last-modified: 1618129511043
       responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Sale'
-          description: Sale found
-          x-last-modified: 1617176085906
-          headers: {}
-          links: {}
         '204':
           description: Sale Deleted
-          x-last-modified: 1617176124306
+          x-last-modified: 1618129058799
         '404':
           description: Sale not found
-          x-last-modified: 1617176156891
-      operationId: Delete Sale
-      summary: Delete the sale
-      description: The delete method would delete a sale
-    x-last-modified: 1617175561345
+          x-last-modified: 1618129076792
+    parameters:
+      - deprecated: false
+        name: id
+        schema:
+          type: string
+        in: path
+        required: true
+        x-last-modified: 1618128635416
+    x-last-modified: 1618128596612
 components:
   schemas:
-    Customer:
-      description: Return a specific Customer object by the customer's ID number
-      required:
-        - id
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-        group:
-          type: string
-        category:
-          type: string
-      x-last-modified: 1617166913619
-    Totals:
-      description: Gives the total of a sale
-      type: object
-      properties:
-        totalPrice:
-          type: number
-        totalTax:
-          type: number
-        totalPayment:
-          type: number
-      x-last-modified: 1617167886805
-    SaleItem:
-      description: A SaleItem that the customer has purchased
-      type: object
-      properties:
-        productID:
-          type: string
-        quantity:
-          type: number
-        price:
-          type: number
-      x-last-modified: 1617168123010
     Sale:
       description: A Sale object
       required:
@@ -210,6 +164,63 @@ components:
         totals:
           $ref: '#/components/schemas/Totals'
       x-last-modified: 1617170416003
+    Customer:
+      description: Return a specific Customer object by the customer's ID number
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        group:
+          type: string
+      x-last-modified: 1618128691636
+    Summary:
+      description: A summary object of a sale
+      required:
+        - id
+      type: object
+      properties:
+        numberOfSales:
+          type: integer
+        totalPayment:
+          type: number
+        group:
+          type: string
+      x-last-modified: 1618130261803
+    SaleItem:
+      description: A SaleItem that the customer has purchased
+      required:
+        - id
+      type: object
+      properties:
+        productID:
+          type: string
+        quantity:
+          format: double
+          type: number
+        price:
+          format: double
+          type: number
+      x-last-modified: 1618130288513
+    Totals:
+      description: Gives the total of a sale
+      required:
+        - id
+      type: object
+      properties:
+        totalPrice:
+          format: double
+          type: number
+        totalTax:
+          format: double
+          type: number
+        totalPayment:
+          format: double
+          type: number
+      x-last-modified: 1618130306040
   securitySchemes: {}
   headers: {}
   responses: {}
