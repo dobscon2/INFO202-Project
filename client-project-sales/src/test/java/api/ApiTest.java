@@ -51,28 +51,28 @@ public class ApiTest {
         sale1.id("1");
         sale1.saleDate("11/04/2021");
         sale1.customer(customer1);
-        sale1.addItemsItem(new SaleItem().price(100.00).productID("12345").quantity(2.0));
+        sale1.addItemsItem(new SaleItem().price(100.00).productId("12345").quantity(2.0));
         sale1.totals(new Totals().totalPayment(200.00).totalPrice(200.00).totalTax(0.0));
 
         sale2 = new Sale();
         sale2.id("2");
         sale2.saleDate("11/04/2021");
         sale2.customer(customer1);
-        sale2.addItemsItem(new SaleItem().price(5000.00).productID("54321").quantity(2.0));
+        sale2.addItemsItem(new SaleItem().price(5000.00).productId("54321").quantity(2.0));
         sale2.totals(new Totals().totalPayment(10000.00).totalPrice(10000.00).totalTax(0.0));
 
         sale3 = new Sale();
         sale3.id("3");
         sale3.saleDate("10/04/2021");
         sale3.customer(customer2);
-        sale3.addItemsItem(new SaleItem().price(100.00).productID("12345").quantity(2.0));
+        sale3.addItemsItem(new SaleItem().price(100.00).productId("12345").quantity(2.0));
         sale3.totals(new Totals().totalPayment(100.00).totalPrice(100.00).totalTax(0.0));
 
         sale4 = new Sale();
         sale4.id("4");
         sale4.saleDate("8/04/2021");
         sale4.customer(customer1);
-        sale4.addItemsItem(new SaleItem().price(100.00).productID("12345").quantity(2.0));
+        sale4.addItemsItem(new SaleItem().price(100.00).productId("12345").quantity(2.0));
         sale4.totals(new Totals().totalPayment(100.00).totalPrice(100.00).totalTax(0.0));
 
         sales.createNewSale(sale1).execute();

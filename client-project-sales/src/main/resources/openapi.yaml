@@ -197,7 +197,7 @@ components:
         - id
       type: object
       properties:
-        productID:
+        productId:
           type: string
         quantity:
           format: double
