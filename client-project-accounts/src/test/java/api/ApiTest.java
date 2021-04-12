@@ -33,8 +33,8 @@ public class ApiTest {
         customer1 = new Customer();
         customer1.setId("abc123");
         customer1.setEmail("testy@tester.com");
-        customer1.setFirstname("Testy");
-        customer1.setLastname("Tester");
+        customer1.setFirstName("Testy");
+        customer1.setLastName("Tester");
         customer1.setUsername("testy_tester");
         customer1.setGroup("Regular Customer");
 
@@ -42,16 +42,16 @@ public class ApiTest {
         customer2.setId("xyz789");
         customer2.setEmail("johndoe@joker.com");
         customer2.setUsername("joker");
-        customer2.setFirstname("John");
-        customer2.setLastname("Doe");
+        customer2.setFirstName("John");
+        customer2.setLastName("Doe");
         customer2.setGroup("Customer VIP");
 
         customer3 = new Customer();
         customer3.setId("uo531");
         customer3.setUsername("zucc");
         customer3.setEmail("zucc@facebook.com");
-        customer3.setFirstname("Mark");
-        customer3.setLastname("Zuckerberg");
+        customer3.setFirstName("Mark");
+        customer3.setLastName("Zuckerberg");
         customer3.setGroup("Customer VIP");
 
         customerAPI.createCustomer(customer1).execute();

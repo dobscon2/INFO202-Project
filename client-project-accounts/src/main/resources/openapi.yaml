@@ -159,9 +159,9 @@ components:
           type: string
         username:
           type: string
-        firstname:
+        firstName:
           type: string
-        lastname:
+        lastName:
           type: string
         group:
           type: string
